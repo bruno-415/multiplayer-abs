@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 5f;
     public float health;
     public float maxHealth = 100f;
+    public float minHeight = 100f;
+    public float fireRate = 15f;
+    public float range = 100f;
 
     private bool[] inputs;
     private float yVelocity = 0;
@@ -35,6 +38,12 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (transform.position.y <= -minHeight) 
+        {
+            Die();
+            ServerSend.PlayerHealth(this);
+        }
+
         if (health <= 0f)
         {
             return;
@@ -91,11 +100,18 @@ public class Player : MonoBehaviour
 
     public void Shoot(Vector3 _viewDirection)
     {
-        if (Physics.Raycast(shootOrigin.position, _viewDirection, out RaycastHit _hit, 25f))
+        if (health <= 0f)
+        {
+            return;
+        }
+
+        ServerSend.PlayerShoots(this);
+
+        if (Physics.Raycast(shootOrigin.position, _viewDirection, out RaycastHit _hit, range))
         {
             if (_hit.collider.CompareTag("Player"))
             {
-                _hit.collider.GetComponent<Player>().TakeDamage(25f);
+                _hit.collider.GetComponent<Player>().TakeDamage(50f);
             }
         }
     }
@@ -110,11 +126,7 @@ public class Player : MonoBehaviour
         health -= _damage;
         if (health <= 0f)
         {
-            health = 0f;
-            controller.enabled = false;
-            transform.position = new Vector3(0f, 25f, 0f);
-            ServerSend.PlayerPosition(this);
-            StartCoroutine(Respawn());
+            Die();
         }
 
         ServerSend.PlayerHealth(this);
@@ -127,5 +139,14 @@ public class Player : MonoBehaviour
         health = maxHealth;
         controller.enabled = true;
         ServerSend.PlayerRespawned(this);
+    }
+
+    private void Die()
+    {
+        health = 0f;
+        controller.enabled = false;
+        transform.position = new Vector3(0f, 25f, 0f);
+        ServerSend.PlayerPosition(this);
+        StartCoroutine(Respawn());
     }
 }

@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     public float health;
     public float maxHealth;
     public MeshRenderer model;
+    public GameObject muzzleFlash;
 
     public void Initialize(int _id, string _username)
     {
@@ -37,4 +38,22 @@ public class PlayerManager : MonoBehaviour
         model.enabled = true;
         SetHealth(maxHealth);
     }
+
+    public void CreateMuzzleFlash(Vector3 _position)
+    {
+        transform.position = _position;
+
+        ParticleSystem _muzzleFlash = GetComponentInChildren<ParticleSystem>();
+        _muzzleFlash.Play();
+        //GameObject _muzzleFlash = Instantiate(muzzleFlash, transform.position, Quaternion.identity);
+        //StartCoroutine(DestroyAfterTime(_muzzleFlash));
+
+    }
+
+    private IEnumerator DestroyAfterTime(GameObject _object)
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(_object);
+    }
+
 }

@@ -5,12 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Transform camTransform;
+    public ParticleSystem muzzleFlash;
+    public float fireRate = 15f;
+
+    private float nextTimeToFire = 0f;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
         {
-            ClientSend.PlayerShoot(camTransform.forward); 
+            ClientSend.PlayerShoot(camTransform.forward);
+            nextTimeToFire = Time.time + 1 / fireRate;
+
+            //muzzleFlash.Play();
         }
     }
 

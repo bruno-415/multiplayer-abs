@@ -66,4 +66,12 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].Respawn();
     }
 
+    public static void PlayerShoots(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();
+
+
+        GameManager.players[_id].CreateMuzzleFlash(_position);
+    }
 }

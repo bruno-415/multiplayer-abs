@@ -135,5 +135,16 @@ public class ServerSend
             SendTCPDataToAll(_packet);
         }
     }
+    
+    public static void PlayerShoots(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerShoots))
+        {
+            _packet.Write(_player.id);
+            _packet.Write(_player.shootOrigin.transform.position);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
     #endregion
 }
