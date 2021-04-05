@@ -1,5 +1,9 @@
+
+// I took this class from a tutorial
+
 using UnityEngine;
 using UnityEngine.Events;
+
 
 public class CharacterController2D : MonoBehaviour
 {
