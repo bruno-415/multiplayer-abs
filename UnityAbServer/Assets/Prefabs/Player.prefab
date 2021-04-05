@@ -28,7 +28,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1975923220141927880}
   m_Father: {fileID: 5283287771854054597}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,13 +103,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5301973872535277483}
-  m_LocalRotation: {x: 0, y: 0.7933534, z: 0, w: 0.6087614}
-  m_LocalPosition: {x: 0.2024, y: 0.3167, z: 0.35}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.2924, y: 0.3833, z: 0.4501}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5283287771854054597}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 105, z: 0}
+  m_Father: {fileID: 6982344036365534543}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7464919013095009838
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +140,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6982344036365534543}
-  - {fileID: 1975923220141927880}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -162,12 +162,12 @@ MonoBehaviour:
   gravity: -19.62
   moveSpeed: 5
   jumpSpeed: 9
+  shootForce: 1200
   health: 0
   maxHealth: 100
   minHeight: 100
   fireRate: 15
   range: 100
-  muzzleFlash: {fileID: 0}
 --- !u!143 &8946655978490232259
 CharacterController:
   m_ObjectHideFlags: 0

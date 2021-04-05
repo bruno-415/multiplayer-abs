@@ -937,7 +937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7464919013095009838, guid: 9a41430da7b0046528dcb33179584f0a,
     type: 3}
-  weaponEffectsPrefab: {fileID: 8605313964564771970, guid: f2653af9211904ef4af360d859d92fab,
+  bulletPrefab: {fileID: 2673428796430719163, guid: 0237665cf257a499a8b1a1ef0b4a5d70,
     type: 3}
 --- !u!4 &1229520991
 Transform:

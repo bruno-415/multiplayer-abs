@@ -8,7 +8,7 @@ public class NetworkManager : MonoBehaviour
     public static NetworkManager instance;
 
     public GameObject playerPrefab;
-    public GameObject weaponEffectsPrefab;
+    public GameObject bulletPrefab;
 
     private void Awake()
     {
@@ -41,4 +41,8 @@ public class NetworkManager : MonoBehaviour
         return Instantiate(playerPrefab, new Vector3(0f, 0.5f, 0f), Quaternion.identity).GetComponent<Player>();
     }
 
+    public Bullet InstantiateBullet(Transform _shootOrigin)
+    {
+        return Instantiate(bulletPrefab, _shootOrigin.position, _shootOrigin.rotation).GetComponent<Bullet>();
+    }
 }

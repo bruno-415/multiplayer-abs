@@ -9,7 +9,9 @@ public class PlayerManager : MonoBehaviour
     public float health;
     public float maxHealth;
     public MeshRenderer model;
-    public GameObject muzzleFlash;
+    public MeshRenderer pistolModel;
+
+    Animator anim;
 
     public void Initialize(int _id, string _username)
     {
@@ -31,29 +33,25 @@ public class PlayerManager : MonoBehaviour
     public void Die()
     {
         model.enabled = false;
+        pistolModel.enabled = false;
     }
 
     public void Respawn()
     {
         model.enabled = true;
+        pistolModel.enabled = true;
         SetHealth(maxHealth);
     }
 
-    public void CreateMuzzleFlash(Vector3 _position)
+    public void PlayWeaponEffects(Vector3 _position)
     {
         transform.position = _position;
 
-        ParticleSystem _muzzleFlash = GetComponentInChildren<ParticleSystem>();
-        _muzzleFlash.Play();
-        //GameObject _muzzleFlash = Instantiate(muzzleFlash, transform.position, Quaternion.identity);
-        //StartCoroutine(DestroyAfterTime(_muzzleFlash));
+        GetComponentInChildren<ParticleSystem>().Play();
 
-    }
+        GetComponentInChildren<AudioSource>().Play();
 
-    private IEnumerator DestroyAfterTime(GameObject _object)
-    {
-        yield return new WaitForSeconds(1f);
-        Destroy(_object);
+        GetComponentInChildren<Animator>().Play("PistolShot");
     }
 
 }

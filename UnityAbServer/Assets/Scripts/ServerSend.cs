@@ -141,7 +141,52 @@ public class ServerSend
         using (Packet _packet = new Packet((int)ServerPackets.playerShoots))
         {
             _packet.Write(_player.id);
-            _packet.Write(_player.shootOrigin.transform.position);
+            _packet.Write(_player.shootOrigin.position);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void SpawnBullet(Bullet _bullet, int _shotByPlayer)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.spawnBullet))
+        {
+            _packet.Write(_bullet.id);
+            _packet.Write(_shotByPlayer);
+            _packet.Write(_bullet.transform.position);
+            _packet.Write(_bullet.transform.rotation);
+            _packet.Write(_bullet.transform.forward);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void BulletPosition(Bullet _bullet)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.bulletPosition))
+        {
+            _packet.Write(_bullet.id);
+            _packet.Write(_bullet.transform.position);
+
+            SendUDPDataToAll(_packet);
+        }
+    }
+
+    public static void BulletHit(Bullet _bullet)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.bulletHit))
+        {
+            _packet.Write(_bullet.id);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void RemoveBullet(Bullet _bullet)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.bulletHit))
+        {
+            _packet.Write(_bullet.id);
 
             SendTCPDataToAll(_packet);
         }

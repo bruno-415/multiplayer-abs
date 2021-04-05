@@ -33,11 +33,6 @@ public class Client : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        tcp = new TCP();
-        udp = new UDP();
-    }
 
     private void OnApplicationQuit()
     {
@@ -46,6 +41,9 @@ public class Client : MonoBehaviour
 
     public void ConnectToServer()
     {
+        tcp = new TCP();
+        udp = new UDP();
+
         InitializeClientData();
 
         isConnected = true;
@@ -279,7 +277,11 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
             { (int)ServerPackets.playerHealth, ClientHandle.PlayerHealth },
             { (int)ServerPackets.playerRespawned, ClientHandle.PlayerRespawned },
-            { (int)ServerPackets.playerShoots, ClientHandle.PlayerShoots }
+            { (int)ServerPackets.playerShoots, ClientHandle.PlayerShoots },
+            { (int)ServerPackets.spawnBullet, ClientHandle.SpawnBullet },
+            { (int)ServerPackets.bulletPosition, ClientHandle.BulletPosition },
+            { (int)ServerPackets.bulletHit, ClientHandle.BulletHit },
+            { (int)ServerPackets.removeBullet, ClientHandle.RemoveBullet },
         };
         Debug.Log("Initialized packets.");
     }

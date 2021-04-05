@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public float gravity = -9.81f;
     public float moveSpeed = 5f;
     public float jumpSpeed = 5f;
+    public float shootForce = 1200f;
     public float health;
     public float maxHealth = 100f;
     public float minHeight = 100f;
@@ -107,13 +108,15 @@ public class Player : MonoBehaviour
 
         ServerSend.PlayerShoots(this);
 
-        if (Physics.Raycast(shootOrigin.position, _viewDirection, out RaycastHit _hit, range))
+        /* if (Physics.Raycast(shootOrigin.position, _viewDirection, out RaycastHit _hit, range))
         {
             if (_hit.collider.CompareTag("Player"))
             {
                 _hit.collider.GetComponent<Player>().TakeDamage(50f);
             }
-        }
+        } */
+
+        NetworkManager.instance.InstantiateBullet(shootOrigin).Initialize(_viewDirection, shootForce, id);
     }
 
     public void TakeDamage(float _damage)

@@ -7,10 +7,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
         
     public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
+    public static Dictionary<int, BulletManager> bullets = new Dictionary<int, BulletManager>();
 
 
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
+    public GameObject bulletPrefab;
 
     private void Awake()
     {
@@ -40,4 +42,12 @@ public class GameManager : MonoBehaviour
         _player.GetComponent<PlayerManager>().Initialize(_id, _username);
         players.Add(_id, _player.GetComponent<PlayerManager>());
     }
+
+    public void SpawnBullet(int _id, Vector3 _position, Quaternion _rotation)
+    {
+        GameObject _bullet = Instantiate(bulletPrefab, _position, _rotation);
+        _bullet.GetComponent<BulletManager>().Initialize(_id);
+        bullets.Add(_id, _bullet.GetComponent<BulletManager>());
+    }
+
 }

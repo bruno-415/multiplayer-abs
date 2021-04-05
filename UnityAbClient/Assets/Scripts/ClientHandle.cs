@@ -71,7 +71,38 @@ public class ClientHandle : MonoBehaviour
         int _id = _packet.ReadInt();
         Vector3 _position = _packet.ReadVector3();
 
+        GameManager.players[_id].PlayWeaponEffects(_position);
+    }
 
-        GameManager.players[_id].CreateMuzzleFlash(_position);
+    public static void SpawnBullet(Packet _packet)
+    {
+        int _bulletId = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();
+        int _shotByPlayer = _packet.ReadInt();
+        Quaternion _rotation = _packet.ReadQuaternion();
+
+        GameManager.instance.SpawnBullet(_bulletId, _position, _rotation);
+    }
+
+    public static void BulletPosition(Packet _packet)
+    {
+        int _bulletId = _packet.ReadInt();
+        Vector3 _position = _packet.ReadVector3();
+
+        GameManager.bullets[_bulletId].transform.position = _position;
+    }
+
+    public static void BulletHit(Packet _packet)
+    {
+        int _bulletId = _packet.ReadInt();
+
+        GameManager.bullets[_bulletId].Destroy();
+    }
+
+    public static void RemoveBullet(Packet _packet)
+    {
+        int _bulletId = _packet.ReadInt();
+
+        GameManager.bullets[_bulletId].Destroy();
     }
 }

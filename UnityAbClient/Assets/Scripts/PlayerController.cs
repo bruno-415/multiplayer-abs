@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Transform camTransform;
-    public ParticleSystem muzzleFlash;
+    //public ParticleSystem muzzleFlash;
     public float fireRate = 15f;
 
     private float nextTimeToFire = 0f;
