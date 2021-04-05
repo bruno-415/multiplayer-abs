@@ -1,5 +1,5 @@
 
-// I took this class from a tutorial
+// I got this character controller class from a tutorial
 
 using UnityEngine;
 using UnityEngine.Events;
